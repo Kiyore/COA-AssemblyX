@@ -1,0 +1,198 @@
+:root {
+    --primary: #7c3aed;
+    --primary-light: #8b5cf6;
+    --dark: #0e0e1a;
+    --darker: #09090f;
+    --light: #f8fafc;
+    --gray: #94a3b8;
+    --success: #10b981;
+  }
+  
+  body {
+    background: linear-gradient(135deg, var(--darker), var(--dark));
+    color: var(--light);
+    min-height: 100vh;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .playground-wrapper {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  
+  .playground-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  .playground-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .playground-header p {
+    color: var(--gray);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .challenges-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .challenge-category h2 {
+    color: var(--light);
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+  }
+  
+  .challenge-category h2::before {
+    content: "▹";
+    color: var(--primary);
+    margin-right: 0.8rem;
+    font-size: 1.2rem;
+  }
+  
+  .challenge-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .challenge-list li {
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+  
+  .challenge-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--light);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 3px solid transparent;
+  }
+  
+  .challenge-list a:hover {
+    background: rgba(124, 58, 237, 0.15);
+    transform: translateX(8px);
+    border-left-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+  }
+  
+  .challenge-name {
+    font-size: 1.05rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+  }
+  
+  .challenge-name::before {
+    content: "›";
+    color: var(--primary);
+    margin-right: 0.8rem;
+    font-size: 1.2rem;
+  }
+  
+  .challenge-arch {
+    font-size: 0.8rem;
+    background: rgba(124, 58, 237, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    color: #a78bfa;
+    font-weight: 600;
+  }
+  
+  .back-btn-container {
+    text-align: center;
+    margin-top: 3rem;
+  }
+  
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+  }
+  
+  .back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+    background: linear-gradient(135deg, #6d28d9, #2563eb);
+  }
+  
+  .back-btn:active {
+    transform: translateY(1px);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .playground-wrapper {
+      padding: 1.5rem;
+      margin: 1rem;
+    }
+  
+    .playground-header h1 {
+      font-size: 2rem;
+    }
+  
+    .challenge-list a {
+      padding: 0.8rem 1rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  
+    .challenge-arch {
+      align-self: flex-end;
+    }
+  }
+  

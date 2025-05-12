@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>ARM Fundamentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/arm.css') }}">
+</head>
+
+<body>
+    <h1 class="header">🔧 ARM Architecture Fundamentals</h1>
+
+    <p class="subtext">
+        ARM (Advanced RISC Machine) is a family of reduced instruction set computing (RISC) architectures that dominates
+        mobile and embedded systems. Known for its power efficiency and scalable performance, ARM processors use a
+        load-store architecture with uniform fixed-length instructions (typically 32-bit ARM or 16-bit Thumb).
+    </p>
+
+    <div class="feature-box">
+        <p><strong>Key ARM Features:</strong> Conditional execution, barrel shifter, multiple register load/store, and
+            Thumb instruction set for code density.</p>
+    </div>
+
+    <p class="subtext">
+        ARM processors have 16 visible general-purpose registers (<code>R0-R15</code>), with <code>R13</code> typically
+        used as the stack pointer (<code>SP</code>), <code>R14</code> as the link register (<code>LR</code>), and
+        <code>R15</code> as the program counter (<code>PC</code>). The Current Program Status Register
+        (<code>CPSR</code>) holds processor state flags (N, Z, C, V) and control bits.
+    </p>
+
+    <p class="subtext">
+        ARM instructions are conditionally executed based on flags in the CPSR (e.g., <code>ADDEQ</code> executes only
+        if Z=1). This eliminates many branches and improves pipeline efficiency. The architecture supports several
+        addressing modes including immediate, register, scaled register, and PC-relative addressing.
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Register</th>
+                <th>Name</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>R0-R3</code></td>
+                <td>Argument/Result</td>
+                <td>Function arguments and return values</td>
+            </tr>
+            <tr>
+                <td><code>R4-R8</code></td>
+                <td>Variable</td>
+                <td>General purpose (must be preserved by callee)</td>
+            </tr>
+            <tr>
+                <td><code>R9</code></td>
+                <td>SB/Platform</td>
+                <td>Platform-specific uses (e.g., static base)</td>
+            </tr>
+            <tr>
+                <td><code>R10</code></td>
+                <td>Variable</td>
+                <td>Additional general-purpose register</td>
+            </tr>
+            <tr>
+                <td><code>R11</code></td>
+                <td>FP</td>
+                <td>Frame pointer (optional)</td>
+            </tr>
+            <tr>
+                <td><code>R12</code></td>
+                <td>IP</td>
+                <td>Intra-procedure call scratch</td>
+            </tr>
+            <tr>
+                <td><code>R13</code></td>
+                <td>SP</td>
+                <td>Stack pointer</td>
+            </tr>
+            <tr>
+                <td><code>R14</code></td>
+                <td>LR</td>
+                <td>Link register (stores return address)</td>
+            </tr>
+            <tr>
+                <td><code>R15</code></td>
+                <td>PC</td>
+                <td>Program counter (+8 offset in ARM state)</td>
+            </tr>
+            <tr>
+                <td><code>CPSR</code></td>
+                <td>-</td>
+                <td>Current Program Status Register (flags/state)</td>
+            </tr>
+            <tr>
+                <td><code>SPSR</code></td>
+                <td>-</td>
+                <td>Saved Program Status Register (exception modes)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="subtext">
+        ARM supports multiple processor modes (User, FIQ, IRQ, Supervisor, etc.) with banked registers for fast context
+        switching. The unified memory access (Von Neumann architecture) and simple pipeline design (typically 3-8
+        stages) make ARM highly efficient for low-power applications.
+    </p>
+
+    <div class="feature-box">
+        <p><strong>Instruction Examples:</strong><br>
+            <code>LDR R0, [R1, #4]</code> (Load from memory)<br>
+            <code>ADD R2, R3, R4, LSL #2</code> (Shift-and-add)<br>
+            <code>BLO label</code> (Branch if unsigned lower)<br>
+            <code>STMDB SP!, {R0-R3, LR}</code> (Store multiple decrement before)
+        </p>
+    </div>
+
+    <div class="back-link-container">
+        <a href="{{ url_for('architectures') }}" class="back-link">← Back to Architectures</a>
+    </div>
+</body>
+
+</html>

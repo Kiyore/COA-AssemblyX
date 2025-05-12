@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code Playground</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      background-color: #0e0e1a;
+      color: #ffffff;
+    }
+
+    .left-panel {
+      width: 40%;
+      padding: 30px;
+      background-color: #1c1c2e;
+      border-right: 1px solid #2c2c3e;
+      overflow-y: auto;
+      height: 100vh;
+    }
+
+    .right-panel {
+      width: 60%;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      background-color: #0e0e1a;
+      height: 100vh;
+    }
+
+    .question-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #7c3aed;
+    }
+
+    .question-description {
+      font-size: 16px;
+      color: #ccc;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .solution-btn {
+      margin-top: 20px;
+      padding: 10px 14px;
+      background-color: #2e1065;
+      color: #c4b5fd;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .solution-btn:hover {
+      background-color: #4c1d95;
+    }
+
+    .code-editor {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .architecture-select {
+      padding: 8px 12px;
+      background-color: #2e1065;
+      color: #c4b5fd;
+      border: 1px solid #4c1d95;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    textarea {
+      flex: 1;
+      width: 100%;
+      background-color: #1c1c2e;
+      color: #ffffff;
+      border: 1px solid #2c2c3e;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 14px;
+      border-radius: 8px;
+      resize: none;
+      min-height: 0;
+    }
+
+    .submit-btn {
+      margin-top: 16px;
+      align-self: flex-end;
+      padding: 10px 18px;
+      background-color: #7c3aed;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .submit-btn:hover {
+      background-color: #6b21a8;
+    }
+
+    .submit-btn:disabled {
+      background-color: #4c1d95;
+      cursor: not-allowed;
+    }
+
+    #solution-box {
+      margin-top: 12px;
+      display: none;
+      background: #1c1c2e;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #2c2c3e;
+      color: #a3e635;
+      white-space: pre-wrap;
+      font-family: monospace;
+    }
+
+    .output-block {
+      margin-top: 20px;
+      background: #1c1c2e;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #2c2c3e;
+    }
+
+    .output-block pre {
+      white-space: pre-wrap;
+      font-family: monospace;
+    }
+    .result-correct {
+  background-color: #14532d;
+  color: #4ade80;
+}
+
+.result-incorrect {
+  background-color: #7f1d1d;
+  color: #f87171;
+}
+  </style>
+</head>
+<body>
+  <div class="left-panel">
+    <div class="question-title" id="question-title">Loading question...</div>
+    <div class="question-description" id="question-description"></div>
+    <button class="solution-btn" id="solution-btn">👀 View Solution</button>
+    <pre id="solution-box"></pre>
+  </div>
+
+  <div class="right-panel">
+    <form class="code-editor">
+      <div class="editor-header">
+        <h3>Code Editor</h3>
+        <select class="architecture-select" name="architecture">
+          <option value="x86">x86 Assembly</option>
+          <option value="mips32">MIPS32 Assembly</option>
+          <option value="arm">ARM Assembly</option>
+        </select>
+      </div>
+      <textarea name="code" id="code-editor" spellcheck="false"></textarea>
+      <button type="submit" class="submit-btn">Submit</button>
+      <div class="output-block" style="display: none;">
+        <h3>Execution Output:</h3>
+        <pre id="output-content"></pre>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Get question ID from URL
+      const pathParts = window.location.pathname.split('/');
+      const questionId = pathParts[pathParts.length - 1];
+      
+      // Load question data
+      try {
+        const response = await fetch(`/api/question/${questionId}`);
+        if (!response.ok) throw new Error('Question not found');
+        
+        const question = await response.json();
+        
+        // Update UI
+        document.getElementById('question-title').textContent = question.title;
+        document.getElementById('question-description').textContent = question.description;
+        document.getElementById('code-editor').value = question.boilerplate;
+        
+        // Store question data globally
+        window.currentQuestion = question;
+        
+      } catch (error) {
+        console.error('Failed to load question:', error);
+        document.getElementById('question-title').textContent = 'Error loading question';
+        return;
+      }
+
+      // Solution button handler
+      document.getElementById('solution-btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        const solutionBox = document.getElementById('solution-box');
+        const arch = document.querySelector('.architecture-select').value;
+        
+        if (solutionBox.style.display === 'none') {
+          const solution = window.currentQuestion?.solutions[arch] || 
+                          window.currentQuestion?.solutions[arch.replace('32', '')] || 
+                          'No solution available for this architecture';
+          solutionBox.textContent = solution;
+          solutionBox.style.display = 'block';
+        } else {
+          solutionBox.style.display = 'none';
+        }
+      });
+
+      // Form submission handler
+      document.querySelector('.code-editor').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const code = document.getElementById('code-editor').value;
+        const arch = document.querySelector('.architecture-select').value;
+        const submitBtn = e.target.querySelector('.submit-btn');
+        const outputBlock = document.querySelector('.output-block');
+        const outputContent = document.getElementById('output-content');
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Running...';
+        outputBlock.style.display = 'none';
+        
+        try {
+          const response = await fetch('/run', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              code, 
+              architecture: arch,
+              question_id: questionId 
+            })
+          });
+          
+          const data = await response.json();
+          let cleanOutput = data.output || 'No output received.';
+
+          // Clean MIPS output
+          if (arch === 'mips32') {
+            cleanOutput = cleanOutput
+              .split('\n')
+              .filter(line =>
+                !line.startsWith('SPIM Version') &&
+                !line.includes('Copyright') &&
+                !line.startsWith('Loaded:') &&
+                !line.startsWith('All') &&
+                !line.startsWith('See'),
+              )
+              .join('\n')
+              .trim();
+          }
+
+          // Display output
+          outputContent.textContent = cleanOutput;
+          outputBlock.style.display = 'block';
+
+          // Verify the answer
+          if (data.expected_output) {
+            const expected = data.expected_output.trim();
+            const actual = cleanOutput.trim();
+            const isCorrect = actual === expected;
+
+            // Create result indicator
+            let resultIndicator = document.getElementById('result-indicator');
+            if (!resultIndicator) {
+              resultIndicator = document.createElement('div');
+              resultIndicator.id = 'result-indicator';
+              resultIndicator.style.marginTop = '10px';
+              resultIndicator.style.padding = '10px';
+              resultIndicator.style.borderRadius = '6px';
+              resultIndicator.style.fontWeight = 'bold';
+              outputBlock.appendChild(resultIndicator);
+            }
+
+            if (isCorrect) {
+              resultIndicator.textContent = '✓ Correct Answer!';
+              resultIndicator.style.backgroundColor = '#14532d';
+              resultIndicator.style.color = '#4ade80';
+            } else {
+              resultIndicator.textContent = `✗ Incorrect Answer\nExpected: ${expected}`;
+              resultIndicator.style.backgroundColor = '#7f1d1d';
+              resultIndicator.style.color = '#f87171';
+              resultIndicator.style.whiteSpace = 'pre-wrap';
+            }
+          }
+          
+        } catch (error) {
+          console.error('Error:', error);
+          outputContent.textContent = `Error: ${error.message}`;
+          outputBlock.style.display = 'block';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit';
+        }
+      });
+
+      // Architecture switcher - use question's boilerplate
+      document.querySelector('.architecture-select').addEventListener('change', function() {
+        document.getElementById('code-editor').value = window.currentQuestion.boilerplate;
+      });
+    });
+  </script>
+
+</body>
+</html>

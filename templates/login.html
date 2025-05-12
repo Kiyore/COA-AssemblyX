@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - AssemblyX</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <h1>Welcome to <span>AssemblyX</span></h1>
+      {% if error %}
+        <p style="color: #f87171; text-align: center;">{{ error }}</p>
+      {% endif %}
+      <form method="POST" action="/login">
+        <label for="username">Username</label>
+        <input type="text" name="username" placeholder="yourname123" required>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="••••••••" required>
+
+        <button type="submit">Login</button>
+      </form>
+      <p class="signup-text">Don't have an account? <a href="#">Sign up</a></p>
+    </div>
+  </div>
+</body>
+</html>

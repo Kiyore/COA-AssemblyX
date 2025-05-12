@@ -1,0 +1,71 @@
+@import url('base.css');
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: var(--gray);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.card-grid {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  justify-content: center;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  max-width: 350px;
+  text-decoration: none;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary);
+}
+
+.card i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.card h2 {
+  margin-bottom: 1rem;
+  color: var(--light);
+}
+
+.card p {
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+@media (max-width: 1000px) {
+  .card-grid {
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    max-width: 100%;
+    flex: 1 1 300px;
+  }
+}

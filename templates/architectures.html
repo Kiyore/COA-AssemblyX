@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assembly Architectures</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='/architectures.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Assembly Architectures</h1>
+      <p>Learn about the different assembly architectures and their unique features</p>
+    </div>
+    
+    <div class="architecture-grid">
+      <div class="architecture-card x86">
+        <h2><i class="fas fa-desktop"></i> x86 Architecture</h2>
+        <p>The x86 architecture is a family of instruction set architectures based on the Intel 8086 CPU. It's the dominant architecture for desktop and server computers.</p>
+        <div class="btn-container">
+          <a href="{{ url_for('x86') }}" class="btn x86">Brief about x86</a>
+        </div>
+      </div>
+      
+      <div class="architecture-card arm">
+        <h2><i class="fas fa-mobile-alt"></i> ARM Architecture</h2>
+        <p>ARM (Advanced RISC Machine) is a reduced instruction set computing (RISC) architecture that dominates the mobile and embedded markets.</p>
+        <div class="btn-container">
+          <a href="{{ url_for('arm') }}" class="btn arm">Brief about ARM</a>
+        </div>
+      </div>
+      
+      <div class="architecture-card mips">
+        <h2><i class="fas fa-microchip"></i> MIPS Architecture</h2>
+        <p>MIPS (Microprocessor without Interlocked Pipeline Stages) is a RISC architecture popular in academic settings for teaching computer architecture.</p>
+        <div class="btn-container">
+          <a href="{{ url_for('mips') }}" class="btn mips">Brief about MIPS</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to Dashboard Button -->
+    <div class="back-btn-container">
+      <a href="{{ url_for('dashboard') }}" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+    <div class="copyright">
+      &copy; 2023 AssemblyX. All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>

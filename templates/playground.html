@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Playground</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='/playground.css') }}" />
+</head>
+
+<body>
+  <div class="playground-wrapper">
+    <div class="playground-header">
+      <h1><i class="fas fa-code"></i> Code Playground</h1>
+      <p>Select a challenge to practice your assembly skills</p>
+    </div>
+
+    <div class="challenges-container">
+      <div class="challenge-category">
+        <h2>Beginner Challenges</h2>
+        <ul class="challenge-list">
+          <li>
+            <a href="{{ url_for('code_question', question_id='x86_hello') }}">
+              <span class="challenge-name">Hello World</span>
+              <span class="challenge-arch">x86</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('code_question', question_id='add') }}">
+              <span class="challenge-name">Basic Addition</span>
+              <span class="challenge-arch">Multi-arch</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('code_question', question_id='sub') }}">
+              <span class="challenge-name">Basic Subtraction</span>
+              <span class="challenge-arch">Multi-arch</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('code_question', question_id='mul') }}">
+              <span class="challenge-name">Basic Multiplication</span>
+              <span class="challenge-arch">Multi-arch</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('code_question', question_id='div') }}">
+              <span class="challenge-name">Basic Division</span>
+              <span class="challenge-arch">Multi-arch</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="back-btn-container">
+      <a href="{{ url_for('dashboard') }}" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+      </a>
+    </div>
+  </div>
+</body>
+
+</html>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.question-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const questionId = card.dataset.questionId;
+        sessionStorage.setItem('currentQuestion', JSON.stringify({
+          id: questionId,
+          title: card.textContent.trim()
+        }));
+        window.location.href = `/question/${questionId}`;
+      });
+    });
+  });
+</script>
+<script src=""></script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resources</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='/playground.css') }}" />
+</head>
+<body>
+  <div class="playground-wrapper">
+    <div class="playground-header">
+      <h1><i class="fas fa-book-open"></i> Assembly Resources</h1>
+      <p>Handpicked learning materials and references to help you master assembly</p>
+    </div>
+
+    <div class="challenges-container">
+      <div class="challenge-category">
+        <h2>Documentation & Tutorials</h2>
+        <ul class="challenge-list">
+          <li>
+            <a href="https://www.cs.virginia.edu/~evans/cs216/guides/x86.html" target="_blank">
+              <span class="challenge-name">Guide to x86 Assembly</span>
+              <span class="challenge-arch">x86</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://azeria-labs.com/writing-arm-assembly-part-1/" target="_blank">
+              <span class="challenge-name">Azeria Labs - ARM Tutorials</span>
+              <span class="challenge-arch">ARM</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://minnie.tuhs.org/CompArch/Resources/mips_quick_tutorial.html#IOSystemCalls" target="_blank">
+              <span class="challenge-name">MIPS Quick Tutorial</span>
+              <span class="challenge-arch">MIPS</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="challenge-category" style="margin-top: 2rem;">
+        <h2>Online Tools</h2>
+        <ul class="challenge-list">
+          <li>
+            <a href="https://godbolt.org/" target="_blank">
+              <span class="challenge-name">Compiler Explorer</span>
+              <span class="challenge-arch">Multi-arch</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="back-btn-container">
+      <a href="{{ url_for('dashboard') }}" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+      </a>
+    </div>
+  </div>
+</body>
+</html>

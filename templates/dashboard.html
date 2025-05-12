@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>AssemblyX Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='/dashboard.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>AssemblyX Learning Platform</h1>
+      <p>Master low-level programming with interactive tutorials and real-time coding for x86, MIPS, and ARM
+        architectures.</p>
+    </div>
+
+    <div class="card-grid">
+      <a href="{{ url_for('architectures') }}" class="card">
+        <i class="fas fa-microchip"></i>
+        <h2>Architectures</h2>
+        <p>Learn about x86, ARM, and MIPS architectures with detailed explanations and examples.</p>
+      </a>
+
+      <a href="{{ url_for('playground') }}" class="card">
+        <i class="fas fa-code"></i>
+        <h2>Code Playground</h2>
+        <p>Write and execute assembly code in real-time with our interactive compiler.</p>
+      </a>
+
+      <a href="{{ url_for('resources') }}" class="card">
+        <i class="fas fa-book-open"></i>
+        <h2>Learning Resources</h2>
+        <p>Access tutorials, cheat sheets, and reference materials for all architectures.</p>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+    <div class="copyright">
+      &copy; 2023 AssemblyX. All rights reserved.
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>x86 Architecture</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='/x86.css') }}">
+</head>
+
+<body>
+  <h1 class="header">🔹 x86 Architecture Overview</h1>
+
+  <p class="subtext">
+    The x86 architecture is a powerful and versatile instruction set developed by Intel and widely used in desktop and
+    server processors. It belongs to the CISC (Complex Instruction Set Computer) category, offering a broad range of
+    instructions that can execute complex tasks. This flexibility makes x86 suitable for both high-level applications
+    and low-level hardware control.
+  </p>
+
+  <p class="subtext">
+    At its core, x86 relies on several general-purpose registers, which are small but fast memory locations within the
+    CPU. These registers temporarily hold data, counters, pointers, and return values. The eight primary
+    registers—<code>EAX</code>, <code>EBX</code>, <code>ECX</code>, <code>EDX</code>, <code>ESP</code>,
+    <code>EBP</code>, <code>ESI</code>, and <code>EDI</code>—play specialized roles during execution.
+  </p>
+
+  <p class="subtext">
+    The architecture supports various instruction types such as data movement (e.g., <code>MOV</code>), arithmetic
+    operations (e.g., <code>ADD</code>, <code>SUB</code>), logic operations (e.g., <code>AND</code>, <code>OR</code>),
+    and control flow (e.g., <code>JMP</code>, <code>CALL</code>). x86 also implements multiple addressing modes like
+    immediate, register-based, direct, and indirect addressing—enabling flexible memory access.
+  </p>
+
+  <p class="subtext">
+    Function calls in x86 follow a stack-based calling convention. Parameters are passed through the stack and
+    registers, and the return address is also pushed onto the stack. This makes recursion and nested calls efficient and
+    predictable, and allows functions to maintain local state through the base pointer.
+  </p>
+
+  <p class="subtext">
+    Below is a list of the main x86 registers and their functions:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Register</th>
+        <th>Function</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>EAX</code></td>
+        <td>Accumulator – Used for arithmetic operations and return values from functions</td>
+      </tr>
+      <tr>
+        <td><code>EBX</code></td>
+        <td>Base – Often used for memory access via offsets</td>
+      </tr>
+      <tr>
+        <td><code>ECX</code></td>
+        <td>Counter – Used for loop control and string operations</td>
+      </tr>
+      <tr>
+        <td><code>EDX</code></td>
+        <td>Data – Used in I/O operations and extended precision arithmetic</td>
+      </tr>
+      <tr>
+        <td><code>ESP</code></td>
+        <td>Stack Pointer – Points to the top of the current stack</td>
+      </tr>
+      <tr>
+        <td><code>EBP</code></td>
+        <td>Base Pointer – Points to the base of the stack frame</td>
+      </tr>
+      <tr>
+        <td><code>ESI</code></td>
+        <td>Source Index – Used in string and memory copy operations</td>
+      </tr>
+      <tr>
+        <td><code>EDI</code></td>
+        <td>Destination Index – Often used as a target for string/memory data</td>
+      </tr>
+
+      <tr>
+        <td><code>RAX</code></td>
+        <td>64-bit extension of EAX, used in x86-64 for return values and arithmetic</td>
+      </tr>
+      <tr>
+        <td><code>RBX</code></td>
+        <td>64-bit extension of EBX, used similarly for memory addressing</td>
+      </tr>
+      <tr>
+        <td><code>RCX</code></td>
+        <td>64-bit counter register, often used in loop and shift operations</td>
+      </tr>
+      <tr>
+        <td><code>RDX</code></td>
+        <td>64-bit data register, used in division and multiplication operations</td>
+      </tr>
+      <tr>
+        <td><code>RSP</code></td>
+        <td>64-bit Stack Pointer – points to the top of the stack in 64-bit mode</td>
+      </tr>
+      <tr>
+        <td><code>RBP</code></td>
+        <td>64-bit Base Pointer – used to reference stack frames in 64-bit mode</td>
+      </tr>
+      <tr>
+        <td><code>R8 - R15</code></td>
+        <td>Additional general-purpose registers introduced in x86-64, used for various operations and calling
+          conventions</td>
+      </tr>
+      <tr>
+        <td><code>CS</code></td>
+        <td>Code Segment – holds the segment of the current program code</td>
+      </tr>
+      <tr>
+        <td><code>DS</code></td>
+        <td>Data Segment – generally used to access variables</td>
+      </tr>
+      <tr>
+        <td><code>SS</code></td>
+        <td>Stack Segment – used during stack operations</td>
+      </tr>
+      <tr>
+        <td><code>FS / GS</code></td>
+        <td>Segment registers used for thread-local storage and OS-specific tasks</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div class="back-link-container">
+    <a href="{{ url_for('architectures') }}" class="back-link">← Back to Architectures</a>
+  </div>
+</body>
+
+</html>
